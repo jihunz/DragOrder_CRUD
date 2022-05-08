@@ -25,7 +25,8 @@
 			</thead>
 			<tbody>
 				<c:forEach var="item" items="${list}">
-					<tr>
+					<!-- data-order 값을 고유한 속성으로 수정해야 함-->
+					<tr data-order="${item.code}">
 						<td>${item.code}</td>
 						<td>${item.bookname}</td>
 						<td>${item.publisher}</td>
