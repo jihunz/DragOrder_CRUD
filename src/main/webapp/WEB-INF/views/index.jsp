@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title></title>
+<link rel="/resources/drag_order.css">
 </head>
 <body>
 	<div>
@@ -13,7 +14,7 @@
 		</ul>
 	</div>
 	<div>
-		<table border="1">
+		<table border="1" id='bookTable'>
 			<thead>
 				<tr>
 					<td>도서번호</td>
@@ -26,7 +27,7 @@
 			<tbody>
 				<c:forEach var="item" items="${list}">
 					<!-- data-order 값을 고유한 속성으로 수정해야 함-->
-					<tr data-order="${item.code}">
+					<tr data-order="${item.code}" class="dragItem">
 						<td>${item.code}</td>
 						<td>${item.bookname}</td>
 						<td>${item.publisher}</td>
@@ -43,4 +44,8 @@
 		</table>
 	</div>
 </body>
+<script type="text/javascript" src="/resources/drag_order_dom.js"></script>
+<script type="text/javascript">
+	new DragOrder("#bookTable");
+</script>
 </html>
