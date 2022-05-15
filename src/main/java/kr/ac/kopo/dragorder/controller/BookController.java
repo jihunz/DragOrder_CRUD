@@ -8,10 +8,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.ac.kopo.dragorder.model.Book;
 import kr.ac.kopo.dragorder.service.BookService;
+import kr.ac.kopo.dragorder.util.Orders;
 
 @Controller
 @RequestMapping("/book")
@@ -72,5 +76,16 @@ public class BookController {
 		service.dummy();
 		
 		return "redirect:list";
+	}
+	
+	@ResponseBody
+	@PostMapping("/saveOrder")
+	public String saveOrder(@RequestBody List<Orders> orders) {
+		System.out.println(orders);
+		
+		// 쿼리문에서 버그가 발생함
+		service.saveOrder(orders);
+		
+		return "[saveOrder]: success";
 	}
 }

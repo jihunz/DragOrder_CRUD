@@ -1,8 +1,10 @@
 package kr.ac.kopo.dragorder.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import kr.ac.kopo.dragorder.model.Book;
+import kr.ac.kopo.dragorder.util.Orders;
 
 public interface BookDao {
 
@@ -15,5 +17,7 @@ public interface BookDao {
 	void update(Book item);
 
 	void delete(int code);
+
+	void saveOrder(Orders item);
 
 }

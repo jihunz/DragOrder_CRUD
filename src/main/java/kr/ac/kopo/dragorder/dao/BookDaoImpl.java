@@ -1,5 +1,6 @@
 package kr.ac.kopo.dragorder.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.ac.kopo.dragorder.model.Book;
+import kr.ac.kopo.dragorder.util.Orders;
 
 @Repository
 public class BookDaoImpl implements BookDao {
@@ -37,6 +39,16 @@ public class BookDaoImpl implements BookDao {
 	@Override
 	public void delete(int code) {
 		sql.delete("book.delete", code);
+	}
+
+	@Override
+	public void saveOrder(Orders item) {
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("code", item.getCode());
+		map.put("order", item.getOrder());
+		System.out.println(map.get("code"));
+		System.out.println(map.get("order"));
+		sql.update("book.saveOrder", map);
 	}
 
 }

@@ -19,11 +19,17 @@
 	<update id="update">
 		UPDATE book
 		SET bookname=#{bookname}, publisher=#{publisher}, price=#{price}
-		WHERE code=${code}
+		WHERE code=#{code}
 	</update>
 	
 	<delete id="delete">
 		DELETE FROM book
 		WHERE code=#{code}
 	</delete>
+	
+	<update id="saveOrder">
+		UPDATE book
+		SET order=#{map.order}
+		WHERE code=#{map.code}
+	</update>
 </mapper>
