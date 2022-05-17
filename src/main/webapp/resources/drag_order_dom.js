@@ -118,7 +118,7 @@ class DragOrder {
             const order = parseInt(item.dataset["order"]);
             const element = {
                 code: code,
-                order: order
+                originalOrder: order
             };
 
             orders.push(element);

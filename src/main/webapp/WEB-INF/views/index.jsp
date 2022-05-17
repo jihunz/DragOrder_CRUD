@@ -31,7 +31,7 @@
 						<td>${item.bookname}</td>
 						<td>${item.publisher}</td>
 						<td>${item.price}</td>
-						<td><a href="update/${item.code}">수정</a> <a href="delete/${item.code}">삭제</a></td>
+						<td><a href="book/update/${item.code}">수정</a> <a href="book/delete/${item.code}">삭제</a></td>
 					</tr>
 				</c:forEach>
 				<c:if test="${list.size() < 1}">

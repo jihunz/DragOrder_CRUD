@@ -29,7 +29,7 @@
 	
 	<update id="saveOrder">
 		UPDATE book
-		SET order=#{map.order}
+		SET original_order=#{map.order}
 		WHERE code=#{map.code}
 	</update>
 </mapper>

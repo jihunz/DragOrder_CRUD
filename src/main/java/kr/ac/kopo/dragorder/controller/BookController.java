@@ -81,9 +81,7 @@ public class BookController {
 	@ResponseBody
 	@PostMapping("/saveOrder")
 	public String saveOrder(@RequestBody List<Orders> orders) {
-		System.out.println(orders);
-		
-		// 쿼리문에서 버그가 발생함
+
 		service.saveOrder(orders);
 		
 		return "[saveOrder]: success";
