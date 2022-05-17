@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import kr.ac.kopo.dragorder.model.Book;
-import kr.ac.kopo.dragorder.util.Orders;
+import kr.ac.kopo.dragorder.model.Orders;
 
 public interface BookDao {
 
@@ -19,5 +19,7 @@ public interface BookDao {
 	void delete(int code);
 
 	void saveOrder(Orders item);
+
+	int lastOrder();
 
 }

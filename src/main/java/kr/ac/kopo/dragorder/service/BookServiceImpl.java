@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import kr.ac.kopo.dragorder.dao.BookDao;
 import kr.ac.kopo.dragorder.model.Book;
-import kr.ac.kopo.dragorder.util.Orders;
+import kr.ac.kopo.dragorder.model.Orders;
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -24,6 +24,11 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public void add(Book item) {
+		int lastOrder = dao.lastOrder();
+		
+		// 데이터가 없을 경우 MAX()의 결과가 null임 -> 해결책 필요
+		item.setOriginalOrder(lastOrder + 1);
+		
 		dao.add(item);
 	}
 
@@ -58,13 +63,7 @@ public class BookServiceImpl implements BookService {
 	public void saveOrder(List<Orders> orders) {
 		
 		for(Orders item : orders) {
-//			HashMap<String, Integer> map = new HashMap<String, Integer>();
-//			map.put("code", item.getCode());
-//			map.put("order", item.getOrder());
-//			System.out.println(map.get("code"));
-//			System.out.println(map.get("order"));
 			dao.saveOrder(item);
 		}
 	}
-
 }

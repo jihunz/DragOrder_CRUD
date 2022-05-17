@@ -4,6 +4,7 @@
 <mapper namespace="book">
 	<select id="list" resultType="Book">
 		SELECT * FROM book
+		ORDER BY original_order
 	</select>
 	
 	<select id="item" resultType="Book">
@@ -13,7 +14,7 @@
 	
 	<insert id="add">
 		INSERT INTO book
-		VALUES(NULL, #{bookname}, #{publisher}, #{price}, #{order})
+		VALUES(NULL, #{bookname}, #{publisher}, #{price}, #{originalOrder})
 	</insert>
 	
 	<update id="update">
@@ -27,9 +28,13 @@
 		WHERE code=#{code}
 	</delete>
 	
-	<update id="saveOrder">
+	<update id="saveOrder" parameterType="hashmap">
 		UPDATE book
-		SET original_order=#{map.order}
-		WHERE code=#{map.code}
+		SET original_order=#{originalOrder}
+		WHERE code=#{code}
 	</update>
+	
+	<select id="last_order" resultType="Integer">
+		SELECT MAX(original_order) FROM book;
+	</select>
 </mapper>

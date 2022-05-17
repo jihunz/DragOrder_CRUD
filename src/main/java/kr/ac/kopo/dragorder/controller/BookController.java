@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.ac.kopo.dragorder.model.Book;
+import kr.ac.kopo.dragorder.model.Orders;
 import kr.ac.kopo.dragorder.service.BookService;
-import kr.ac.kopo.dragorder.util.Orders;
 
 @Controller
 @RequestMapping("/book")
@@ -41,6 +41,7 @@ public class BookController {
 	
 	@PostMapping("/add")
 	public String add(Book item) {
+
 		service.add(item);
 		
 		return "redirect:list";
@@ -81,9 +82,8 @@ public class BookController {
 	@ResponseBody
 	@PostMapping("/saveOrder")
 	public String saveOrder(@RequestBody List<Orders> orders) {
-
 		service.saveOrder(orders);
 		
-		return "[saveOrder]: success";
+		return "good";
 	}
 }

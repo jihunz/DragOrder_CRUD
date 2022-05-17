@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.ac.kopo.dragorder.model.Book;
-import kr.ac.kopo.dragorder.util.Orders;
+import kr.ac.kopo.dragorder.model.Orders;
 
 @Repository
 public class BookDaoImpl implements BookDao {
@@ -45,10 +45,16 @@ public class BookDaoImpl implements BookDao {
 	public void saveOrder(Orders item) {
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		map.put("code", item.getCode());
-		map.put("order", item.getOrder());
-		System.out.println(map.get("code"));
-		System.out.println(map.get("order"));
+		map.put("originalOrder", item.getOriginalOrder());
+		
+		System.out.println(item.getOriginalOrder());
+		
 		sql.update("book.saveOrder", map);
+	}
+
+	@Override
+	public int lastOrder() {
+		return sql.selectOne("book.last_order");
 	}
 
 }

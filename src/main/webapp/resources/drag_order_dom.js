@@ -113,16 +113,12 @@ class DragOrder {
         const orders = [];
         const items = document.querySelectorAll(".dragItem");
 
-        items.forEach((item, idx) => {
+        items.forEach((item, i) => {
             const code = parseInt(item.dataset["code"]);
-            const order = parseInt(item.dataset["order"]);
-            const element = {
-                code: code,
-                originalOrder: order
-            };
+            const originalOrder = parseInt(item.dataset["order"]);
+            const element = {code, originalOrder};
 
             orders.push(element);
-            
         });
         console.log(orders);
 
