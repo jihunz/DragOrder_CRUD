@@ -26,7 +26,7 @@
 			</thead>
 			<tbody>
 				<c:forEach var="item" items="${list}">
-					<tr data-order="" data-code="${item.code}" class="dragItem">
+					<tr data-order="${item.originalOrder}" data-code="${item.code}" class="dragItem">
 						<td>${item.code}</td>
 						<td>${item.bookname}</td>
 						<td>${item.publisher}</td>

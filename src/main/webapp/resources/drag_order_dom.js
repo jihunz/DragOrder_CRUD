@@ -6,7 +6,8 @@ class DragOrder {
 
         root.querySelectorAll(".dragItem").forEach((item, index) => {
             item.setAttribute("draggable", true);
-            item.dataset["order"] = index + 1;
+            // data-order 값은 등록 시 서버에서 부여하며, 해당 값을 서버로 부터 받아옴 
+            // item.dataset["order"] = index + 1;
 
             this.list.push(item);
         });
@@ -132,4 +133,5 @@ class DragOrder {
             alert(result);
         }).catch(err => console.log(err));
     }
+
 }
