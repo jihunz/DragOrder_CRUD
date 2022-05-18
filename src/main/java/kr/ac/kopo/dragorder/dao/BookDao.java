@@ -22,4 +22,6 @@ public interface BookDao {
 
 	int lastOrder();
 
+	int count();
+
 }

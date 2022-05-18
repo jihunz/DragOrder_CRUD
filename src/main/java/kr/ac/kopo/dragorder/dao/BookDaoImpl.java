@@ -57,4 +57,9 @@ public class BookDaoImpl implements BookDao {
 		return sql.selectOne("book.last_order");
 	}
 
+	@Override
+	public int count() {
+		return sql.selectOne("book.count");
+	}
+
 }

@@ -37,4 +37,8 @@
 	<select id="last_order" resultType="Integer">
 		SELECT MAX(original_order) FROM book;
 	</select>
+	
+	<select id="count" resultType="Integer">
+		SELECT COUNT(*) FROM book;
+	</select>
 </mapper>

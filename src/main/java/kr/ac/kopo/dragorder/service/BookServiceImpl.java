@@ -24,10 +24,16 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public void add(Book item) {
-		int lastOrder = dao.lastOrder();
-		
-		// 데이터가 없을 경우 MAX()의 결과가 null임 -> 해결책 필요
-		item.setOriginalOrder(lastOrder + 1);
+		int lastOrder = 0;
+		int count = dao.count();
+
+		if(count > 0) {
+			lastOrder = dao.lastOrder();
+			item.setOriginalOrder(lastOrder + 1);
+		} else {
+			lastOrder = 1;
+			item.setOriginalOrder(lastOrder);
+		}
 		
 		dao.add(item);
 	}
@@ -54,6 +60,17 @@ public class BookServiceImpl implements BookService {
 			item.setBookname("도서명" + i);
 			item.setPublisher("출판사" + i);
 			item.setPrice(i * 1000);
+			
+			int lastOrder = 0;
+			int count = dao.count();
+
+			if(count > 0) {
+				lastOrder = dao.lastOrder();
+				item.setOriginalOrder(lastOrder + 1);
+			} else {
+				lastOrder = 1;
+				item.setOriginalOrder(lastOrder);
+			}
 
 			dao.add(item);
 		}
