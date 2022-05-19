@@ -28,7 +28,7 @@ public class BookController {
 	@RequestMapping("/list")
 	public String list(Model model) {
 		List<Book> list = service.list();
-		
+	
 		model.addAttribute("list", list);
 		
 		return PATH + "list";

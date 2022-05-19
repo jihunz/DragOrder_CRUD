@@ -18,7 +18,7 @@ public class RootController {
 	@RequestMapping("/")
 	public String index(Model model) {
 		List<Book> list = service.list();
-		
+
 		model.addAttribute("list", list);
 		
 		return "index";

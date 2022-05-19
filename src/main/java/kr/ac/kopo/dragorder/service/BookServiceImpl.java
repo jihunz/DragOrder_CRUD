@@ -24,15 +24,13 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public void add(Book item) {
-		int lastOrder = 0;
 		int count = dao.count();
 
 		if(count > 0) {
-			lastOrder = dao.lastOrder();
+			int lastOrder = dao.lastOrder();
 			item.setOriginalOrder(lastOrder + 1);
 		} else {
-			lastOrder = 1;
-			item.setOriginalOrder(lastOrder);
+			item.setOriginalOrder(item.getLastOrder());
 		}
 		
 		dao.add(item);
@@ -61,15 +59,13 @@ public class BookServiceImpl implements BookService {
 			item.setPublisher("출판사" + i);
 			item.setPrice(i * 1000);
 			
-			int lastOrder = 0;
 			int count = dao.count();
 
 			if(count > 0) {
-				lastOrder = dao.lastOrder();
+				int lastOrder = dao.lastOrder();
 				item.setOriginalOrder(lastOrder + 1);
 			} else {
-				lastOrder = 1;
-				item.setOriginalOrder(lastOrder);
+				item.setOriginalOrder(item.getLastOrder());
 			}
 
 			dao.add(item);

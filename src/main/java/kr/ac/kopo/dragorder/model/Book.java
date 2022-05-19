@@ -7,7 +7,7 @@ public class Book {
 	private int price;
 	private int originalOrder;
 
-	private int lastOrder;
+	private int lastOrder = 1;
 
 	public int getCode() {
 		return code;
