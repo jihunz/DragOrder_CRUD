@@ -2,7 +2,7 @@ package kr.ac.kopo.dragorder.model;
 
 public class Orders {
 	private int code;
-	private int originalOrder;
+	private int currentOrder;
 
 	public int getCode() {
 		return code;
@@ -12,12 +12,14 @@ public class Orders {
 		this.code = code;
 	}
 
-	public int getOriginalOrder() {
-		return originalOrder;
+	public int getCurrentOrder() {
+		return currentOrder;
 	}
 
-	public void setOriginalOrder(int originalOrder) {
-		this.originalOrder = originalOrder;
+	public void setCurrentOrder(int currentOrder) {
+		this.currentOrder = currentOrder;
 	}
+
+
 
 }

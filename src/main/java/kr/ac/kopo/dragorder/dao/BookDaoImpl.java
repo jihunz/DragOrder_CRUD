@@ -45,9 +45,7 @@ public class BookDaoImpl implements BookDao {
 	public void saveOrder(Orders item) {
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		map.put("code", item.getCode());
-		map.put("originalOrder", item.getOriginalOrder());
-		
-		System.out.println(item.getOriginalOrder());
+		map.put("currentOrder", item.getCurrentOrder());
 		
 		sql.update("book.saveOrder", map);
 	}

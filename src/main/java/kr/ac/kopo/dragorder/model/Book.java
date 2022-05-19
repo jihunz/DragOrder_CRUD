@@ -5,7 +5,7 @@ public class Book {
 	private String bookname;
 	private String publisher;
 	private int price;
-	private int originalOrder;
+	private int currentOrder;
 
 	private int lastOrder = 1;
 
@@ -41,20 +41,20 @@ public class Book {
 		this.price = price;
 	}
 
-	public int getOriginalOrder() {
-		return originalOrder;
-	}
-
-	public void setOriginalOrder(int originalOrder) {
-		this.originalOrder = originalOrder;
-	}
-
 	public int getLastOrder() {
 		return lastOrder;
 	}
 
 	public void setLastOrder(int lastOrder) {
 		this.lastOrder = lastOrder;
+	}
+
+	public int getCurrentOrder() {
+		return currentOrder;
+	}
+
+	public void setCurrentOrder(int currentOrder) {
+		this.currentOrder = currentOrder;
 	}
 
 }

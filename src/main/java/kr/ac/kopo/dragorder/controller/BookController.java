@@ -82,7 +82,12 @@ public class BookController {
 	@ResponseBody
 	@PostMapping("/saveOrder")
 	public String saveOrder(@RequestBody List<Orders> orders) {
+		for(Orders item : orders) {
+			System.out.println(item.getCurrentOrder());
+		}
+		
 		service.saveOrder(orders);
+		
 		
 		return "good";
 	}

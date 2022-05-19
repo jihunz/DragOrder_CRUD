@@ -1,12 +1,13 @@
 class DragOrder {
     constructor(selector, direction) {
         this.list = [];
+        this.changedList = [];
 
         const root = document.querySelector(selector);
 
         root.querySelectorAll(".dragItem").forEach((item, index) => {
             item.setAttribute("draggable", true);
-            // data-order 값은 등록 시 서버에서 부여하며, 해당 값을 서버로 부터 받아옴 -> 해당 클래스가 부여할 경우 주석 삭제할 것
+            // data-order 값은 등록 시 서버에서 부여하며, 해당 값을 서버로 부터 받아옴
             // item.dataset["order"] = index + 1;
 
             this.list.push(item);
@@ -79,6 +80,8 @@ class DragOrder {
                 //const targetOrder = target.dataset["order"];                
 
                 console.log(`${this.source.dataset["order"]} ====>>> ${this.target.dataset["order"]}`);
+                // 리스트에 순서가 바뀐 item이 누적되지 않게 초기화
+                this.changedList = [];
                 this.moveOrder();
                 this.saveOrder();
             });
@@ -89,56 +92,64 @@ class DragOrder {
         const source_ = parseInt(this.source.dataset["order"]);
         const target_ = parseInt(this.target.dataset["order"]);
 
+        
         this.list.forEach(item => {
-            const order = parseInt(item.getAttribute("data-order"));
+            // order 값이 변한 item의 code를 저장하기 위한 필드
+            const code = parseInt(item.getAttribute("data-code"));
+            // order 값이 변한 item의 order값을 저장하기 위해 전역 변수로 변경 (const -> var)
+            var order = parseInt(item.getAttribute("data-order"));
 
             if (source_ < target_) {
                 this.target.parentNode.insertBefore(this.source, this.target.nextSibling);
 
-                if (order == source_)
+                if (order == source_){
                     item.setAttribute("data-order", target_);
-                    // 변경될 order 값만 배열(전역 변수)에 저장하는 함수 호출
-                else if (order > source_ && order <= target_)
+
+                    this.putOrder(code, parseInt(item.getAttribute("data-order")));
+                    console.log(this.changedList);
+                }
+                else if (order > source_ && order <= target_) {
                     item.setAttribute("data-order", order - 1);
-                    // 변경될 order 값만 배열(전역 변수)에 저장하는 함수 호출
+
+                    this.putOrder(code, parseInt(item.getAttribute("data-order")));
+                    console.log(this.changedList);
+                }
             } else {
                 this.target.parentNode.insertBefore(this.source, this.target);
 
-                if (order == source_)
+                if (order == source_) {
                     item.setAttribute("data-order", target_);
-                    // 변경될 order 값만 배열(전역 변수)에 저장하는 함수 호출
-                else if (order < source_ && order >= target_)
+                    
+                    this.putOrder(code, parseInt(item.getAttribute("data-order")));
+                    console.log(this.changedList);
+                }
+                else if (order < source_ && order >= target_) {
                     item.setAttribute("data-order", order + 1);
-                    // 변경될 order 값만 배열(전역 변수)에 저장하는 함수 호출
+                    
+                    this.putOrder(code, parseInt(item.getAttribute("data-order")));
+                    console.log(this.changedList);
+                }
             }
         });
     }
 
+    
+    // 변경될 order 값과 code를 배열(전역 변수)에 저장하는 함수
+    putOrder(code, currentOrder) {
+        const element = {code, currentOrder};
+        this.changedList.push(element);
+    }
+    
+    // 저장한 배열 서버로 보내는 함수 -> 서버에서 WHERE code로 변경된 레코드의 order만 변경
     saveOrder() {
-        const orders = [];
-        const items = document.querySelectorAll(".dragItem");
-
-        items.forEach((item, i) => {
-            const code = parseInt(item.dataset["code"]);
-            const originalOrder = parseInt(item.dataset["order"]);
-            const element = {code, originalOrder};
-
-            orders.push(element);
-        });
-        console.log(orders);
-
         fetch('book/saveOrder', {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(orders),
+            body: JSON.stringify(this.changedList),
         }).then(res => res.json()).then(result => {
             alert(result);
         }).catch(err => console.log(err));
     }
-
-    // 변경될 order 값과 code를 배열(전역 변수)에 저장하는 함수 생성 -> 서버에서 WHERE code로 변경된 레코드의 order만 변경
-    
-    // 저장한 배열 서버로 보내는 함수 생성
 }

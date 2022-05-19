@@ -1,21 +1,26 @@
-.dragItem {
-    list-style: none;
-
-    background-color: darkgrey;
-    height: 50px;
-    line-height: 50px;
-    width: 300px;
-    text-align: center;
-    font-weight: bold;
-
-    margin: 5px 0;
+* {
+	font-family: 'Noto Sans KR', sans-serif;
 }
 
-.dragStart {    
-    opacity: 50%;
+.dragStart {
+	opacity: 50%;
 }
 
-.dragOver {    
-    opacity: 50%;
-    background-color: aqua;
+.dragOver {
+	opacity: 50%;
+	background-color: rgb(72, 255, 0);
+}
+
+.index-container {
+	width: 1000px !important;
+	margin: 0 auto;
+}
+
+.index-container > h1 {
+	margin-bottom: 20px;
+}
+
+table { 
+	--bs-table-striped-bg: rgb(24 241 149/ 5%) !important;
+	box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px !important;
 }
