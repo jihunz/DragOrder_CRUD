@@ -97,15 +97,19 @@ class DragOrder {
 
                 if (order == source_)
                     item.setAttribute("data-order", target_);
+                    // 변경될 order 값만 배열(전역 변수)에 저장하는 함수 호출
                 else if (order > source_ && order <= target_)
                     item.setAttribute("data-order", order - 1);
+                    // 변경될 order 값만 배열(전역 변수)에 저장하는 함수 호출
             } else {
                 this.target.parentNode.insertBefore(this.source, this.target);
 
                 if (order == source_)
                     item.setAttribute("data-order", target_);
+                    // 변경될 order 값만 배열(전역 변수)에 저장하는 함수 호출
                 else if (order < source_ && order >= target_)
                     item.setAttribute("data-order", order + 1);
+                    // 변경될 order 값만 배열(전역 변수)에 저장하는 함수 호출
             }
         });
     }
@@ -134,4 +138,7 @@ class DragOrder {
         }).catch(err => console.log(err));
     }
 
+    // 변경될 order 값과 code를 배열(전역 변수)에 저장하는 함수 생성 -> 서버에서 WHERE code로 변경된 레코드의 order만 변경
+    
+    // 저장한 배열 서버로 보내는 함수 생성
 }
