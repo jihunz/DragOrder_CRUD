@@ -136,12 +136,12 @@ class DragOrder {
     }
 
     
-    // code, data-order를 배열(전역 변수)에 저장하는 함수
+    // code, data-order를 리스트에 저장하는 함수
     putOrder(code, currentOrder) {
         this.changedList.push({code, currentOrder});
     }
     
-    // 저장한 배열을 서버로 보내는 함수 -> 서버에서 WHERE code로 변경된 레코드의 order만 변경
+    // 저장한 배열을 서버로 보내는 함수
     saveOrder() {
         fetch('book/saveOrder', {
             method: "POST",
