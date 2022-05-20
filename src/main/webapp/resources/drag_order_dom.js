@@ -1,6 +1,8 @@
 class DragOrder {
     constructor(selector, direction) {
         this.list = [];
+
+        // 순서가 변경된 드래그 아이템의 data-code, data-order을 저장하기 위한 리스트
         this.changedList = [];
 
         const root = document.querySelector(selector);
@@ -80,7 +82,8 @@ class DragOrder {
                 //const targetOrder = target.dataset["order"];                
 
                 console.log(`${this.source.dataset["order"]} ====>>> ${this.target.dataset["order"]}`);
-                // 리스트에 순서가 바뀐 item이 누적되지 않게 초기화
+
+                // 순서가 바뀐 item이 누적되지 않도록 리스트를 초기화
                 this.changedList = [];
                 this.moveOrder();
                 this.saveOrder();
@@ -103,16 +106,17 @@ class DragOrder {
                 this.target.parentNode.insertBefore(this.source, this.target.nextSibling);
 
                 if (order == source_){
+                    // 드래그 아이템의 data-order값을 target 값으로 바꾸고
                     item.setAttribute("data-order", target_);
 
+                    // 해당 아이템의 code, data-order를 changedList에 저장
+                    // 아래 조건문의 코드들도 동일한 기능을 한다.
                     this.putOrder(code, parseInt(item.getAttribute("data-order")));
-                    console.log(this.changedList);
                 }
                 else if (order > source_ && order <= target_) {
                     item.setAttribute("data-order", order - 1);
 
                     this.putOrder(code, parseInt(item.getAttribute("data-order")));
-                    console.log(this.changedList);
                 }
             } else {
                 this.target.parentNode.insertBefore(this.source, this.target);
@@ -121,26 +125,23 @@ class DragOrder {
                     item.setAttribute("data-order", target_);
                     
                     this.putOrder(code, parseInt(item.getAttribute("data-order")));
-                    console.log(this.changedList);
                 }
                 else if (order < source_ && order >= target_) {
                     item.setAttribute("data-order", order + 1);
                     
                     this.putOrder(code, parseInt(item.getAttribute("data-order")));
-                    console.log(this.changedList);
                 }
             }
         });
     }
 
     
-    // 변경될 order 값과 code를 배열(전역 변수)에 저장하는 함수
+    // code, data-order를 배열(전역 변수)에 저장하는 함수
     putOrder(code, currentOrder) {
-        const element = {code, currentOrder};
-        this.changedList.push(element);
+        this.changedList.push({code, currentOrder});
     }
     
-    // 저장한 배열 서버로 보내는 함수 -> 서버에서 WHERE code로 변경된 레코드의 order만 변경
+    // 저장한 배열을 서버로 보내는 함수 -> 서버에서 WHERE code로 변경된 레코드의 order만 변경
     saveOrder() {
         fetch('book/saveOrder', {
             method: "POST",
