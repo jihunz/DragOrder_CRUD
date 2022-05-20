@@ -28,8 +28,6 @@ public class BookServiceImpl implements BookService {
 		if(count > 0) {
 			int lastOrder = dao.lastOrder();
 			item.setCurrentOrder(lastOrder + 1);
-		} else {
-			item.setCurrentOrder(item.getLastOrder());
 		}
 		
 		dao.add(item);
@@ -63,8 +61,6 @@ public class BookServiceImpl implements BookService {
 			if(count > 0) {
 				int lastOrder = dao.lastOrder();
 				item.setCurrentOrder(lastOrder + 1);
-			} else {
-				item.setCurrentOrder(item.getLastOrder());
 			}
 
 			dao.add(item);

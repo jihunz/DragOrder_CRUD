@@ -81,10 +81,7 @@ public class BookController {
 	@ResponseBody
 	@PostMapping("/saveOrder")
 	public String saveOrder(@RequestBody List<Book> list) {
-		for(Book item : list) {
-			System.out.println(item.getCurrentOrder());
-		}
-		
+
 		service.saveOrder(list);
 		
 		return "[saveOrder]: success";
