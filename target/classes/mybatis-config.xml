@@ -8,7 +8,6 @@
 
 	<typeAliases>
 		<typeAlias type="kr.ac.kopo.dragorder.model.Book" alias="Book"/>
-		<typeAlias type="kr.ac.kopo.dragorder.model.Orders" alias="Orders"/>
 	</typeAliases>
 	
 	<mappers>

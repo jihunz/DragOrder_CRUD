@@ -3,7 +3,6 @@ package kr.ac.kopo.dragorder.service;
 import java.util.List;
 
 import kr.ac.kopo.dragorder.model.Book;
-import kr.ac.kopo.dragorder.model.Orders;
 
 public interface BookService {
 
@@ -19,6 +18,6 @@ public interface BookService {
 
 	void dummy();
 
-	void saveOrder(List<Orders> orders);
+	void saveOrder(List<Book> list);
 
 }

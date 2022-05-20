@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import kr.ac.kopo.dragorder.dao.BookDao;
 import kr.ac.kopo.dragorder.model.Book;
-import kr.ac.kopo.dragorder.model.Orders;
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -73,9 +72,9 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	public void saveOrder(List<Orders> orders) {
+	public void saveOrder(List<Book> list) {
 		
-		for(Orders item : orders) {
+		for(Book item : list) {
 			dao.saveOrder(item);
 		}
 	}

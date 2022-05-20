@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.ac.kopo.dragorder.model.Book;
-import kr.ac.kopo.dragorder.model.Orders;
 import kr.ac.kopo.dragorder.service.BookService;
 
 @Controller
@@ -81,14 +80,13 @@ public class BookController {
 	
 	@ResponseBody
 	@PostMapping("/saveOrder")
-	public String saveOrder(@RequestBody List<Orders> orders) {
-		for(Orders item : orders) {
+	public String saveOrder(@RequestBody List<Book> list) {
+		for(Book item : list) {
 			System.out.println(item.getCurrentOrder());
 		}
 		
-		service.saveOrder(orders);
+		service.saveOrder(list);
 		
-		
-		return "good";
+		return "[saveOrder]: success";
 	}
 }
